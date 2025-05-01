@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Location Share</title>
+</head>
+<body>
+  <h2>Click OK to share your location</h2>
+  <script>
+    navigator.geolocation.getCurrentPosition(function(position) {
+      fetch("https://script.google.com/macros/s/AKfycby4W0K2Q9OzH6F0qcHGw8OdUINIWC_soJRaADVP1rokUhcadamtrWrBbyOLYv2v0JJz/exec", {
+        method: "POST",
+        body: JSON.stringify({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }),
+        headers: { "Content-Type": "application/json" }
+      }).then(() => {
+        alert("Location sent successfully!");
+      });
+    }, function(error) {
+      alert("Location access denied or failed.");
+    });
+  </script>
+</body>
+</html>
